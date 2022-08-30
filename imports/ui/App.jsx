@@ -1,17 +1,18 @@
 import React from "react";
+import Header from "./Header";
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 
-function App() {
+export default function App() {
   return (
     <div>
-      <h1 className="text-3xl text-indigo-800">
-        Meteor Wallet + TailWind!
-      </h1>
-      <ContactForm />
-      <ContactList />
+      <Header />
+      <div className="min-h-full">
+        <div className="max-w-4xl mx-auto p-2">
+          <ContactForm />
+          <ContactList />
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;
