@@ -5,7 +5,9 @@ import ContactList from "./ContactList";
 function App() {
   return (
     <div>
-      <h1>Meteor Wallet - Galaxy</h1>
+      <h1 className="text-3xl text-indigo-800">
+        Meteor Wallet + TailWind!
+      </h1>
       <ContactForm />
       <ContactList />
     </div>
