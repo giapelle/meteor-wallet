@@ -6,6 +6,11 @@ Meteor.methods({
     if (!name) {
       throw new Meteor.Error("Name is required.");
     }
-    return Contacts.insert({ name, email, imageUrl });
+    return Contacts.insert({
+      name,
+      email,
+      imageUrl,
+      createdAt: new Date(),
+    });
   },
 });

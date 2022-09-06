@@ -3,7 +3,7 @@ import { useTracker } from "meteor/react-meteor-data";
 import Contacts from "../api/contacts";
 
 export default function ContactList() {
-  const contacts = useTracker(() => Contacts.find({}).fetch());
+  const contacts = useTracker(() => Contacts.find({}, { sort: { createdAt: -1 } }).fetch());
   return (
     <div>
       <div className="mt-10">
