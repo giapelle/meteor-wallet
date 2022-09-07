@@ -4,8 +4,8 @@ import ContactItem from "./ContactItem";
 import Contacts from "../api/contacts";
 
 export default function ContactList() {
-  const isLoading = useSubscribe("allContacts");
-  const contacts = useFind(() => Contacts.find({}, { sort: { createdAt: -1 } }));
+  const isLoading = useSubscribe("contacts");
+  const contacts = useFind(() => Contacts.find({ archived: { $ne: true } }, { sort: { createdAt: -1 } }));
 
   return (
     <div>

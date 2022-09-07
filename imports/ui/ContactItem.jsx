@@ -3,9 +3,9 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 const ContactItem = memo(({ contact }) => {
-  const removeContact = (event, contactId) => {
+  const archiveContact = (event, contactId) => {
     event.preventDefault();
-    Meteor.call("contacts.remove", { contactId });
+    Meteor.call("contacts.archive", { contactId });
   };
 
   return (
@@ -22,10 +22,10 @@ const ContactItem = memo(({ contact }) => {
       <div>
         <button
           type="button"
-          onClick={(e) => removeContact(e, contact._id)}
+          onClick={(e) => archiveContact(e, contact._id)}
           className="inline-flex items-center rounded-full border border-gray-300 bg-white px-2.5 py-0.5 text-sm font-medium leading-5 text-gray-700 shadow-sm hover:bg-gray-50"
         >
-          Remove
+          Archive
         </button>
       </div>
     </li>
