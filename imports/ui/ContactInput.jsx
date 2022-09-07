@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 
 export default function ContactInput({
   id, type,
   label, value,
+  fullWidth,
   onChange,
 }) {
   return (
-    <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+    <div className={clsx("col-span-6", !fullWidth && "sm:col-span-6 lg:col-span-2")}>
       <label
         htmlFor={id}
         className="block text-sm font-medium text-gray-700"
@@ -30,6 +32,7 @@ ContactInput.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string.isRequired,
+  fullWidth: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 };
 
@@ -37,4 +40,5 @@ ContactInput.defaultProps = {
   id: undefined,
   label: "",
   type: "text",
+  fullWidth: false,
 };

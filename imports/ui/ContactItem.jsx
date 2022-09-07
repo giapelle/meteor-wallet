@@ -17,6 +17,7 @@ const ContactItem = memo(({ contact }) => {
         <div className="min-w-0 flex-1">
           <p className="text-sm font-medium text-gray-900 truncate">{contact.name}</p>
           <p className="text-sm font-medium text-gray-500 truncate">{contact.email}</p>
+          <p className="text-sm font-medium text-gray-500 truncate">{contact.walletId}</p>
         </div>
       </div>
       <div>
@@ -40,5 +41,6 @@ ContactItem.propTypes = {
     name: PropTypes.string,
     email: PropTypes.string,
     imageUrl: PropTypes.string,
+    walletId: PropTypes.string,
   }).isRequired,
 };

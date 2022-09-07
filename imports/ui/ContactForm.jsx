@@ -8,6 +8,7 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [walletId, setWalletId] = useState("");
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
 
@@ -22,13 +23,16 @@ export default function ContactForm() {
   };
 
   const saveContact = () => {
-    Meteor.call("contacts.insert", { name, email, imageUrl }, (err) => {
+    Meteor.call("contacts.insert", {
+      name, email, imageUrl, walletId,
+    }, (err) => {
       if (err) {
         showError({ message: err.error });
       } else {
         setName("");
         setEmail("");
         setImageUrl("");
+        setWalletId("");
         showSuccess({ message: "Contact saved." });
       }
     });
@@ -54,6 +58,12 @@ export default function ContactForm() {
           label="Image URL"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
+        />
+        <ContactInput
+          label="Wallet ID"
+          value={walletId}
+          fullWidth
+          onChange={(e) => setWalletId(e.target.value)}
         />
       </div>
       <div className="px-2 py-3 text-right">
