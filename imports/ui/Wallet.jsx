@@ -3,10 +3,14 @@ import React, { useState } from "react";
 import Modal from "./components/Modal";
 import SelectContact from "./components/SelectContact";
 import Contacts from "../api/contacts";
+import Wallets from "../api/wallets";
+import Loading from "./components/Loading";
 
 export default function Wallet() {
   const isLoadingContacts = useSubscribe("contacts");
+  const isLoadingWallets = useSubscribe("wallets");
   const contacts = useFind(() => Contacts.find({ archived: { $ne: true } }, { sort: { name: 1 } }));
+  const [wallet] = useFind(() => Wallets.find());
 
   const [open, setOpen] = useState(false);
   const [isTransferring, setIsTransferring] = useState(false);
@@ -14,15 +18,25 @@ export default function Wallet() {
   const [destinationWallet, setDestinationWallet] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
 
-  const wallet = {
-    _id: "123456",
-    balance: 5,
-    currency: "USD",
+  const addTransaction = () => {
+    Meteor.call("transactions.insert", {
+      isTransferring,
+      sourceWalletId: wallet._id,
+      destinationWalletId: destinationWallet.walletId || "",
+      amount: Number(amount),
+    }, (err) => {
+      if (err) {
+        setErrorMessage(err.error);
+      } else {
+        setOpen(false);
+        setDestinationWallet({});
+        setAmount(0);
+        setErrorMessage("");
+      }
+    });
   };
 
-  const addTransaction = () => {
-    console.log("New transaction", amount, destinationWallet);
-  };
+  if (isLoadingWallets()) return <Loading />;
 
   return (
     <>
@@ -48,6 +62,7 @@ export default function Wallet() {
                 type="button"
                 onClick={() => {
                   setIsTransferring(false);
+                  setErrorMessage("");
                   setOpen(true);
                 }}
                 className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
@@ -58,6 +73,7 @@ export default function Wallet() {
                 type="button"
                 onClick={() => {
                   setIsTransferring(true);
+                  setErrorMessage("");
                   setOpen(true);
                 }}
                 disabled={isLoadingContacts()}
@@ -93,8 +109,9 @@ export default function Wallet() {
                   id="amount"
                   type="number"
                   value={amount}
-                  onChange={(e) => { setAmount(e.target.value); }}
+                  min={0}
                   placeholder="0.00"
+                  onChange={(e) => { setAmount(e.target.value); }}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </label>
