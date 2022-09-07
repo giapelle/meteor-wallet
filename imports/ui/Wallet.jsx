@@ -1,11 +1,17 @@
+import { useSubscribe, useFind } from "meteor/react-meteor-data";
 import React, { useState } from "react";
 import Modal from "./components/Modal";
+import SelectContact from "./components/SelectContact";
+import Contacts from "../api/contacts";
 
 export default function Wallet() {
+  const isLoadingContacts = useSubscribe("contacts");
+  const contacts = useFind(() => Contacts.find({ archived: { $ne: true } }, { sort: { name: 1 } }));
+
   const [open, setOpen] = useState(false);
   const [isTransferring, setIsTransferring] = useState(false);
   const [amount, setAmount] = useState(0);
-  const [destinationWallet, setDestinationWallet] = useState("");
+  const [destinationWallet, setDestinationWallet] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
 
   const wallet = {
@@ -54,6 +60,7 @@ export default function Wallet() {
                   setIsTransferring(true);
                   setOpen(true);
                 }}
+                disabled={isLoadingContacts()}
                 className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
               >
                 Tranfer money
@@ -69,23 +76,14 @@ export default function Wallet() {
         body={(
           <>
             {isTransferring && (
-              <div>
-                <label
-                  htmlFor="destinationWallet"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Destination wallet
-                  <input
-                    id="destinationWallet"
-                    type="string"
-                    value={destinationWallet}
-                    onChange={(e) => { setDestinationWallet(e.target.value); }}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </label>
-              </div>
+              <SelectContact
+                title="Destination contact"
+                contact={destinationWallet}
+                setContact={setDestinationWallet}
+                contacts={contacts}
+              />
             )}
-            <div>
+            <div className="mt-2">
               <label
                 htmlFor="amount"
                 className="block text-sm font-medium text-gray-700"
