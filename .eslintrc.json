@@ -62,6 +62,9 @@
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true
       }
+    ],
+    "meteor/audit-argument-checks": [
+      "off"
     ]
   }
 }

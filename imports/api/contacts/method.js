@@ -1,22 +1,31 @@
 import { Meteor } from "meteor/meteor";
-import { check } from "meteor/check";
+import SimpleSchema from "simpl-schema";
 import Contacts from ".";
 
 Meteor.methods({
-  "contacts.insert": ({
-    name, email, imageUrl, walletId,
-  }) => {
-    check(name, String);
-    check(email, String);
-    check(imageUrl, String);
-    check(walletId, String);
-    if (!name) throw new Meteor.Error("Name is required.");
-    if (!walletId) throw new Meteor.Error("Wallet ID is required.");
+  "contacts.insert": (args) => {
+    const schema = new SimpleSchema({
+      name: {
+        type: String,
+      },
+      email: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Email,
+      },
+      imageUrl: {
+        type: String,
+        optional: true,
+      },
+      walletId: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Id,
+      },
+    });
+    const cleanArgs = schema.clean(args);
+    schema.validate(cleanArgs);
+
     return Contacts.insert({
-      name,
-      email,
-      imageUrl,
-      walletId,
+      ...cleanArgs,
       createdAt: new Date(),
     });
   },
