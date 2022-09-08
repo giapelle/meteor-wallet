@@ -26,11 +26,7 @@ export default function Wallet() {
       amount: Number(amount),
     }, (err) => {
       if (err) {
-        if (err.error) {
-          setErrorMessage(err.error);
-        } else {
-          err.details?.forEach((error) => { setErrorMessage(error.message); });
-        }
+        setErrorMessage(err.reason || err.error);
       } else {
         setOpen(false);
         setDestinationWallet({});

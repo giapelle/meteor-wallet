@@ -10,12 +10,7 @@ import Wallets from "../imports/api/wallets";
 import "../imports/api/wallets/publications";
 
 Meteor.startup(() => {
-  SimpleSchema.defineValidationErrorTransform((error) => {
-    const ddpError = new Meteor.Error(error.message);
-    ddpError.error = "validation-error";
-    ddpError.details = error.details;
-    return ddpError;
-  });
+  SimpleSchema.defineValidationErrorTransform((error) => new Meteor.Error("validation-error", error.message, JSON.stringify(error.details)));
 
   if (!Wallets.find().count()) {
     Array(10).fill().forEach(() => {
