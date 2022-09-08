@@ -27,7 +27,7 @@ export default function ContactForm() {
       name, email, imageUrl, walletId,
     }, (err) => {
       if (err) {
-        showError({ message: err.error });
+        showError({ message: err.reason || err.error });
       } else {
         setName("");
         setEmail("");

@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import SimpleSchema from "simpl-schema";
-import Transactions from ".";
+import Transactions, { TRANSFER_TYPE, ADD_TYPE } from ".";
 
 Meteor.methods({
   // eslint-disable-next-line meteor/audit-argument-checks
@@ -14,7 +14,7 @@ Meteor.methods({
       },
       destinationWalletId: {
         type: String,
-        optional: args.isTransferring,
+        optional: !args.isTransferring,
       },
       amount: {
         type: Number,
@@ -25,7 +25,7 @@ Meteor.methods({
     schema.validate(cleanArgs);
 
     return Transactions.insert({
-      type: cleanArgs.isTransferring ? "TRANSFER" : "ADD",
+      type: cleanArgs.isTransferring ? TRANSFER_TYPE : ADD_TYPE,
       sourceWalletId: cleanArgs.sourceWalletId,
       destinationWalletId: cleanArgs.destinationWalletId,
       amount: cleanArgs.amount,
