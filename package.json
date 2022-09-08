@@ -25,6 +25,7 @@
     "@babel/core": "^7.19.0",
     "@babel/eslint-parser": "^7.18.9",
     "@babel/preset-react": "^7.18.6",
+    "@types/meteor-collection-hooks": "^0.8.6",
     "eslint": "^8.23.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-import-resolver-meteor": "^0.4.0",
