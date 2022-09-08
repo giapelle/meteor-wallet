@@ -10,11 +10,12 @@ const Transactions = new Mongo.Collection("transactions");
 export default Transactions;
 
 Transactions.before.insert((_, transaction) => {
+  const sourceWallet = Wallets.findOne(transaction.sourceWalletId);
+  if (!sourceWallet) {
+    throw new Meteor.Error("Source wallet non found.");
+  }
+
   if (transaction.type === TRANSFER_TYPE) {
-    const sourceWallet = Wallets.findOne(transaction.sourceWalletId);
-    if (!sourceWallet) {
-      throw new Meteor.Error("Source wallet non found.");
-    }
     if (sourceWallet.balance < transaction.amount) {
       throw new Meteor.Error("Insufficients funds.");
     }
@@ -26,10 +27,6 @@ Transactions.before.insert((_, transaction) => {
     });
   }
   if (transaction.type === ADD_TYPE) {
-    const sourceWallet = Wallets.findOne(transaction.sourceWalletId);
-    if (!sourceWallet) {
-      throw new Meteor.Error("Source wallet non found.");
-    }
     Wallets.update(transaction.sourceWalletId, {
       $inc: { balance: transaction.amount },
     });
