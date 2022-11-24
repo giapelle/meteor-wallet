@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "preserveSymlinks": true,
+    "baseUrl": ".",
     "paths": {
       "meteor/*": [
         "node_modules/@types/meteor/*",
