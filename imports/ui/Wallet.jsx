@@ -40,13 +40,13 @@ export default function Wallet() {
 
   return (
     <>
-      <div className="flex font-sans shadow-md my-10">
+      <div className="my-10 flex font-sans shadow-md">
         <form className="flex-auto p-6">
           <div className="flex flex-wrap">
             <div className="w-full flex-none text-sm font-medium text-gray-500">
               Main account
             </div>
-            <div className="w-full flex-none text-sm font-medium text-gray-500 mt-2">
+            <div className="mt-2 w-full flex-none text-sm font-medium text-gray-500">
               Wallet ID:
             </div>
             <h1 className="flex-auto text-lg font-semibold text-gray-700">
@@ -57,7 +57,7 @@ export default function Wallet() {
             </div>
           </div>
           <div className="flex space-x-4 text-sm font-medium">
-            <div className="flex-auto flex space-x-4 mt-4">
+            <div className="mt-4 flex flex-auto space-x-4">
               <button
                 type="button"
                 onClick={() => {
@@ -65,7 +65,7 @@ export default function Wallet() {
                   setErrorMessage("");
                   setOpen(true);
                 }}
-                className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
               >
                 Add money
               </button>
@@ -77,7 +77,7 @@ export default function Wallet() {
                   setOpen(true);
                 }}
                 disabled={isLoadingContacts()}
-                className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
               >
                 Tranfer money
               </button>
@@ -112,7 +112,7 @@ export default function Wallet() {
                   min={0}
                   placeholder="0.00"
                   onChange={(e) => { setAmount(e.target.value); }}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 />
               </label>
             </div>
@@ -122,7 +122,7 @@ export default function Wallet() {
           <button
             type="button"
             onClick={addTransaction}
-            className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+            className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
           >
             {isTransferring ? "Transfer" : "Add"}
           </button>

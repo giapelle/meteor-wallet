@@ -9,7 +9,7 @@ export default function App() {
     <div>
       <Header />
       <div className="min-h-full">
-        <div className="max-w-4xl mx-auto p-2">
+        <div className="mx-auto max-w-4xl p-2">
           <Wallet />
           <ContactForm />
           <ContactList />

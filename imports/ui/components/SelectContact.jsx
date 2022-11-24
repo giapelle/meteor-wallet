@@ -15,7 +15,7 @@ export default function SelectContact({
           <div className="relative mt-1">
             <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
               <span className="flex items-center">
-                {contact.imageUrl && (<img src={contact.imageUrl} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />)}
+                {contact.imageUrl && (<img src={contact.imageUrl} alt="" className="h-6 w-6 shrink-0 rounded-full" />)}
                 <span className="ml-3 block truncate">{contact.name || "Select a contact"}</span>
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -30,14 +30,14 @@ export default function SelectContact({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute z-10 mt-1 max-h-32 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <Listbox.Options className="absolute z-10 mt-1 max-h-32 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                 {!contacts.length && (
                   <Listbox.Option
-                    className="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
+                    className="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900"
                     disabled
                   >
                     <div className="flex items-center">
-                      <span className="font-normal ml-3 block truncate">
+                      <span className="ml-3 block truncate font-normal">
                         No contacts found
                       </span>
                     </div>
@@ -47,7 +47,7 @@ export default function SelectContact({
                   <Listbox.Option
                     key={c._id}
                     className={({ active }) => clsx(
-                      active ? "text-white bg-indigo-600" : "text-gray-900",
+                      active ? "bg-indigo-600 text-white" : "text-gray-900",
                       "relative cursor-default select-none py-2 pl-3 pr-9",
                     )}
                     value={c}
@@ -55,7 +55,7 @@ export default function SelectContact({
                     {({ selected, active }) => (
                       <>
                         <div className="flex items-center">
-                          {c.imageUrl && (<img src={c.imageUrl} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />)}
+                          {c.imageUrl && (<img src={c.imageUrl} alt="" className="h-6 w-6 shrink-0 rounded-full" />)}
                           <span
                             className={clsx(selected ? "font-semibold" : "font-normal", "ml-3 block truncate")}
                           >
