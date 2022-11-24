@@ -3,11 +3,9 @@
   "private": true,
   "scripts": {
     "start": "concurrently -p \"[{name}]\" -n \"MONGO,METEOR\" -c \"green.bold,blue.bold\" \"npm:mongodb:start\" \"npm:meteor:start\"",
-    "meteor:start": "dotenv -- bash -c 'wait-on tcp:${MONGO_PORT:-27017} && ROOT_URL=${ROOT_URL:-http://localhost:${PORT:-3000}} meteor run --port ${PORT:-3000}'",
-    "meteor:debug": "dotenv -- bash -c 'wait-on tcp:${MONGO_PORT:-27017} && ROOT_URL=${ROOT_URL:-http://localhost:${PORT:-3000}} meteor run --port ${PORT:-3000} --inspect=9229'",
+    "meteor:start": "dotenv -- bash -c 'wait-on tcp:${MONGO_PORT:-27017} && meteor run --port ${PORT:-3000}'",
+    "meteor:debug": "dotenv -- bash -c 'wait-on tcp:${MONGO_PORT:-27017} && meteor run --port ${PORT:-3000} --inspect=9229'",
     "mongodb:start": "concurrently -c \"yellow.bold,red.bold\" -n \"UBUNTU,DEBIAN\" \"sudo service mongodb start\" \"sudo systemctl start mongod\"",
-    "test": "meteor test --once --driver-package meteortesting:mocha",
-    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
@@ -42,7 +40,6 @@
     "mainModule": {
       "client": "client/main.jsx",
       "server": "server/main.js"
-    },
-    "testModule": "tests/main.js"
+    }
   }
 }
