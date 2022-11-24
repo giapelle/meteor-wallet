@@ -18,12 +18,14 @@
     }
   },
   "plugins": [
-    "meteor"
+    "meteor",
+    "tailwindcss"
   ],
   "extends": [
     "airbnb",
     "airbnb/hooks",
-    "plugin:meteor/recommended"
+    "plugin:meteor/recommended",
+    "plugin:tailwindcss/recommended"
   ],
   "settings": {
     "import/resolver": {
