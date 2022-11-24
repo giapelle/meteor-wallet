@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./ui/**/*.{js,jsx,ts,tsx}",
-    "./client/*.html",
+    "./client/*.{html,js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {},
