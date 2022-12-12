@@ -1,8 +1,8 @@
 import React from "react";
 import { useSubscribe, useFind } from "meteor/react-meteor-data";
 import ContactItem from "./ContactItem";
-import Contacts from "../api/contacts";
-import Loading from "./components/Loading";
+import Contacts from "../../api/contacts";
+import Loading from "../components/Loading";
 
 export default function ContactList() {
   const isLoading = useSubscribe("contacts");

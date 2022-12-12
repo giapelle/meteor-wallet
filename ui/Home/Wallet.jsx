@@ -1,10 +1,10 @@
 import { useSubscribe, useFind } from "meteor/react-meteor-data";
 import React, { useState } from "react";
-import Modal from "./components/Modal";
-import SelectContact from "./components/SelectContact";
-import Contacts from "../api/contacts";
-import Wallets from "../api/wallets";
-import Loading from "./components/Loading";
+import Modal from "../components/Modal";
+import SelectContact from "../components/SelectContact";
+import Contacts from "../../api/contacts";
+import Wallets from "../../api/wallets";
+import Loading from "../components/Loading";
 
 export default function Wallet() {
   const isLoadingContacts = useSubscribe("contacts");

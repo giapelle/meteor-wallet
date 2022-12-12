@@ -1,8 +1,8 @@
 import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
 import ContactInput from "./ContactInput";
-import ErrorAlert from "./components/ErrorAlert";
-import SuccessAlert from "./components/SuccessAlert";
+import ErrorAlert from "../components/ErrorAlert";
+import SuccessAlert from "../components/SuccessAlert";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
