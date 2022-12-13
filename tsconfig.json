@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "esnext",
     "preserveSymlinks": true,
     "baseUrl": ".",
     "paths": {
