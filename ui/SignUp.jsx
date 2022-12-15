@@ -1,9 +1,18 @@
 import React from "react";
 
 export default function SignUp() {
+  const signUp = () => {
+    console.log("sign-up");
+  };
+
   return (
     <div>
-      sign up
+      <button
+        type="button"
+        onClick={() => signUp()}
+      >
+        Sign Up
+      </button>
     </div>
   );
 }
