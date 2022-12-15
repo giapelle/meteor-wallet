@@ -1,9 +1,13 @@
+import { Meteor } from "meteor/meteor";
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutePaths } from "../../helpers/routePaths";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [loggedUser, loadingLoggedUser] = useLoggedUser();
 
   return (
     <header className="bg-indigo-600">
@@ -14,13 +18,24 @@ export default function Header() {
               <span className="sr-only">Meteor Wallet</span>
               <img className="h-10 w-auto" src="/images/logo.png" alt="" />
             </Link>
-            <button
-              type="button"
-              className="font-bold text-white"
-              onClick={() => navigate(RoutePaths.SIGN_UP)}
-            >
-              Sign Up
-            </button>
+            {!loadingLoggedUser && !loggedUser && (
+              <button
+                type="button"
+                className="font-bold text-white"
+                onClick={() => navigate(RoutePaths.SIGN_UP)}
+              >
+                Sign Up
+              </button>
+            )}
+            {!loadingLoggedUser && loggedUser && (
+              <button
+                type="button"
+                className="font-bold text-white"
+                onClick={() => Meteor.logout()}
+              >
+                Log Out
+              </button>
+            )}
           </div>
         </div>
       </nav>
