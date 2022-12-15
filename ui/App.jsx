@@ -1,29 +1,21 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Header from "./Header";
+import NotFound from "./NotFound";
+import Layout from "./Layout";
 import Home from "./Home";
 import SignUp from "./SignUp";
 
 export default function App() {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={(
-          <div className="h-full">
-            <Header />
-            <div className="min-h-full">
-              <div className="mx-auto max-w-4xl p-2">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="signup" element={<SignUp />} />
-                </Routes>
-              </div>
-            </div>
-          </div>
-         )}
-      />
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="signup" element={<SignUp />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
